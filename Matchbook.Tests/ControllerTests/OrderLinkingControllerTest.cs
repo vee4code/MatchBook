@@ -20,7 +20,7 @@ namespace Matchbook.Tests
             var orderLinkSummary = new OrderLinkSummary()
             {
                 LinkId = -1,
-                ErrorCode = HttpStatusCode.OK,
+                StatusCode = HttpStatusCode.OK,
                 Message = "OrderId is either null or 0"
             };
             OrderLinkInput orderLinkInput = new OrderLinkInput() { OrderIds = null, Name = null};
@@ -34,7 +34,7 @@ namespace Matchbook.Tests
             //Assert  
             Assert.Equal(data.Message, orderLinkSummary.Message);
             Assert.Equal(data.LinkId, orderLinkSummary.LinkId);
-            Assert.Equal(data.ErrorCode, orderLinkSummary.ErrorCode);
+            Assert.Equal(data.StatusCode, orderLinkSummary.StatusCode);
         }
 
         [Fact]
@@ -44,7 +44,7 @@ namespace Matchbook.Tests
             var orderLinkSummary = new OrderLinkSummary()
             {
                 LinkId = 1,
-                ErrorCode = HttpStatusCode.Created,
+                StatusCode = HttpStatusCode.Created,
                 Message = "Successfully Linked"
             };
             OrderLinkInput orderLinkInput = new OrderLinkInput() 
@@ -61,7 +61,7 @@ namespace Matchbook.Tests
             //Assert  
             Assert.Equal(data.Message, orderLinkSummary.Message);
             Assert.Equal(data.LinkId, orderLinkSummary.LinkId);
-            Assert.Equal(data.ErrorCode, orderLinkSummary.ErrorCode);
+            Assert.Equal(data.StatusCode, orderLinkSummary.StatusCode);
         }
     }
 }

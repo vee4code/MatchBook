@@ -21,8 +21,12 @@ namespace Matchbook.Business.Models
         {
             if (value != null)
             {
-                bool isUnique = new LinkOrder().IsUnique(value as string);
-                if (isUnique == false)
+                bool isUnique;
+                string message;
+                (isUnique, message) =  new LinkOrder().IsUnique(value as string);
+                if(!string.IsNullOrEmpty(message))
+                    return new ValidationResult(message);
+                else if (isUnique == false)
                     return new ValidationResult("Link name must be unique.");
                 else
                     return ValidationResult.Success;

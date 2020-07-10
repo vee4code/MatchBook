@@ -30,15 +30,10 @@ namespace Matchbook.Business
                 int count = orders.GroupBy(group => new { group.ProductSymbol, group.SubAccountId }).Count();
                 if(count == 1)
                 {
-                    List<int> noExistingLinkId = new List<int>();
-                    noExistingLinkId = orders.Where(order => string.IsNullOrEmpty(order.LinkId.ToString())).Select(o => o.Id).ToList();
-                    if (noExistingLinkId.Count() != orderIds.Count)
+                    int existingLinkIdCount = orders.Where(order => !string.IsNullOrEmpty(order.LinkId.ToString())).Count();
+                    if (existingLinkIdCount > 0)
                     {
-                        orderLinkSummary.LinkId = orders.Where(order => !string.IsNullOrEmpty(order.LinkId.ToString())).FirstOrDefault().LinkId ?? -1;
-                        if(orderLinkSummary.LinkId != -1)
-                        {
-                            ordersDao.UpdateOrders(noExistingLinkId, orderLinkSummary.LinkId);
-                        }                        
+                        orderLinkSummary.Message = "Link already exists";                       
                     }
                     else
                     {                       
@@ -63,12 +58,16 @@ namespace Matchbook.Business
 
         }
 
-        public bool IsUnique(string name)
+        public (bool,string) IsUnique(string name)
         {
             OrderLinkDao orderLinkDao = new OrderLinkDao();
-            if (orderLinkDao.GetLinkCountByName(name) > 0)
-                return false;
-            return true;
+            bool isUnique = false;
+            string message;
+            int count;
+            (count, message) = orderLinkDao.GetLinkCountByName(name);
+            if (count == 0 && string.IsNullOrEmpty(message))
+                isUnique = true;
+            return (isUnique,message);
         }
     }
 }

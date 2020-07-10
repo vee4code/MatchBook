@@ -20,7 +20,7 @@ namespace Matchbook.Tests.Business
             var orderLinkSummary = new OrderLinkSummary()
             {
                 LinkId = 1,
-                ErrorCode = 0,
+                StatusCode = 0,
                 Message = "Successfully Linked"
             };
             List<int> orderIds = new List<int>() { 1, 2, 3 };
@@ -44,7 +44,7 @@ namespace Matchbook.Tests.Business
             //Assert  
             Assert.Equal(data.Message, orderLinkSummary.Message);
             Assert.Equal(data.LinkId, orderLinkSummary.LinkId);
-            Assert.Equal(data.ErrorCode, orderLinkSummary.ErrorCode);
+            Assert.Equal(data.StatusCode, orderLinkSummary.StatusCode);
         }
     }
 }

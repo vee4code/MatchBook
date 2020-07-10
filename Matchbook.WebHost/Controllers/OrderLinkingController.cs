@@ -32,15 +32,15 @@ namespace Matchbook.WebHost.Controllers
                 {
                     orderLinkSummary.LinkId = -1;
                     orderLinkSummary.Message = "OrderId is either null or 0";
-                    orderLinkSummary.ErrorCode = HttpStatusCode.OK;
+                    orderLinkSummary.StatusCode = HttpStatusCode.OK;
                     return orderLinkSummary; 
                 }                    
                 orderLinkSummary = linkOrder.ValidateAndAdd(linkInput.OrderIds, linkInput.Name);
-                orderLinkSummary.ErrorCode = orderLinkSummary.LinkId == -1 ? HttpStatusCode.OK : HttpStatusCode.Created;
+                orderLinkSummary.StatusCode = orderLinkSummary.LinkId == -1 ? HttpStatusCode.OK : HttpStatusCode.Created;
             }
             catch(Exception ex)
             {
-                orderLinkSummary.ErrorCode = HttpStatusCode.InternalServerError;
+                orderLinkSummary.StatusCode = HttpStatusCode.InternalServerError;
                 orderLinkSummary.Message = ex.Message;
             }
 

@@ -99,7 +99,7 @@ namespace Matchbook.Db
 
             var linkMapping = modelBuilder.Entity<OrderLink>();
             linkMapping.HasKey(_ => _.Id);
-            linkMapping.Property(_ => _.Name).HasConversion<string>();
+            linkMapping.HasIndex(_ => _.Name).IsUnique();
             linkMapping.HasMany(_ => _.LinkedOrders);
         }
     }

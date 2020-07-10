@@ -7,6 +7,6 @@ namespace Matchbook.Db.DAL
     public interface IOrderLinkDao
     {
         (int, string) CreateLink(string name);
-        int GetLinkCountByName(string name);
+        (int,string) GetLinkCountByName(string name);
     }
 }

@@ -9,7 +9,7 @@ namespace Matchbook.Business.Models
     public class OrderLinkSummary
     {
         public int LinkId { get; set; }
-        public HttpStatusCode ErrorCode { get; set; }
+        public HttpStatusCode StatusCode { get; set; }
         public string Message { get; set; }
     }
 }

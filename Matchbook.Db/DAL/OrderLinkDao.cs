@@ -28,7 +28,7 @@ namespace Matchbook.Db.DAL
             return (linkId, message);
         }
 
-        public int GetLinkCountByName(string name)
+        public (int,string) GetLinkCountByName(string name)
         {
             int count = 0;
             string message = string.Empty;
@@ -36,13 +36,13 @@ namespace Matchbook.Db.DAL
             try
             {
                 MatchbookDbContext dbContext = new MatchbookDbContext();
-                count = dbContext.OrderLink.Where(link => string.Compare(name, link.Name, true) == 0).Count();
+                count = dbContext.OrderLink.Where(link => link.Name.ToLower() == name.ToLower()).Count();
             }
             catch (Exception ex)
             {
                 message = ex.Message;
             }
-            return count;
+            return (count,message);
         }
     }
 }
